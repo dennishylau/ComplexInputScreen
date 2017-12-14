@@ -41,7 +41,7 @@ class RegistrationTableViewController: UITableViewController {
 		
 		dateFormatter.dateStyle = .medium
 		cell.textLabel?.text = "\(registration.firstName) \(registration.lastName)"
-        cell.detailTextLabel?.text = "\(registration.adultCount + registration.childCount) Person(s), \(dateFormatter.string(from: registration.checkInDate)) - \(dateFormatter.string(from: registration.checkOutDate))"
+        cell.detailTextLabel?.text = "\(registration.adultCount + registration.childCount) Person(s), \(dateFormatter.string(from: registration.checkInDate)) - \(dateFormatter.string(from: registration.checkOutDate)), $\(registration.totalCost)"
 
         return cell
     }

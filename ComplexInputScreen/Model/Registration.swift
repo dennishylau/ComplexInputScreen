@@ -34,6 +34,18 @@ class Registration: NSObject, NSCoding {
 		self.roomType = roomType
 	}
 	
+	override var description: String {
+		return "Registration(firstName: \(firstName), lastName: \(lastName), emailAddress: \(emailAddress), checkInDate: \(checkInDate), checkOutDate: \(checkOutDate), adultCount: \(adultCount), childCount: \(childCount), wantWifi: \(wantWifi), wifiDayCount: \(String(describing: wifiDayCount)), roomType: \(roomType.id)"
+	}
+	
+	var totalCost: Int {
+		let nightsOfStay = Int(checkOutDate.timeIntervalSince(checkInDate) / 86400)
+		let perRoomTotalWifiCost = Int(wantWifi ? 10 * wifiDayCount! : 0)
+		let totalNumOfRooms = Int((Double(adultCount + childCount) / 2).rounded(.up))
+		let totalCost = ( roomType.price * nightsOfStay  + perRoomTotalWifiCost ) * totalNumOfRooms
+		return totalCost
+	}
+	
 	static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 	static let archiveURL = documentsDirectory.appendingPathComponent("registrations")
 	
@@ -45,10 +57,6 @@ class Registration: NSObject, NSCoding {
 		guard let unarchivedRegistrationList = NSKeyedUnarchiver.unarchiveObject(withFile: archiveURL.path) as? [Registration]
 			else {return nil}
 		return unarchivedRegistrationList
-	}
-	
-	override var description: String {
-		return "Registration(firstName: \(firstName), lastName: \(lastName), emailAddress: \(emailAddress), checkInDate: \(checkInDate), checkOutDate: \(checkOutDate), adultCount: \(adultCount), childCount: \(childCount), wantWifi: \(wantWifi), wifiDayCount: \(String(describing: wifiDayCount)), roomType: \(roomType.id)"
 	}
 	
 	struct PropertyKeys {

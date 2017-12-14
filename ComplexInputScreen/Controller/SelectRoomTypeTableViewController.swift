@@ -64,7 +64,7 @@ class SelectRoomTypeTableViewController: UITableViewController {
 		delegate?.didSelect(roomType: roomType!)
 		tableView.reloadData()
 		if let currentNC = self.navigationController {
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
 				currentNC.popViewController(animated: true)
 			}
 		}
