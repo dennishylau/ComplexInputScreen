@@ -9,6 +9,7 @@
 import UIKit
 
 class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeTableViewControllerDelegate, UITextFieldDelegate {
+	// UITextFieldDelegate for textFieldShouldReturn, next button goes to another text field
 	
 	@IBOutlet var keyboardToolbar: UIToolbar!
 	
@@ -154,7 +155,7 @@ class AddRegistrationTableViewController: UITableViewController, SelectRoomTypeT
 		self.dismiss(animated: true, completion: nil)
 	}
 	
-	@IBAction func updateTotalCostView() {
+	func updateTotalCostView() {
 		guard let roomType = roomType else {return}
 		let nightsOfStay = Int(checkOutDatePicker.date.timeIntervalSince(checkInDatePicker.date) / 86400)
 		let perRoomTotalWifiCost = Int(wifiSwitch.isOn ? 10 * wifiStepper.value : 0)
