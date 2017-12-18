@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RoomType: Equatable {
+struct RoomType: Equatable, Codable {
 
 	let id: RoomTypeID
 	var name: String {
@@ -33,7 +33,7 @@ struct RoomType: Equatable {
 		}
 	}
     
-	enum RoomTypeID: String {
+	enum RoomTypeID: String, Codable {
 		case  a, b, c
 	}
 	
